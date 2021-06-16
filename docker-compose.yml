@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  capco-test-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: capco-test-backend
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '3000:3000'
+    command: nodemon --watch . --exec "node" index.js
+
+  mongodb:
+    container_name: capco-test-mongo
+    restart: always
+    image: mongo
+    volumes:
+      - dbdata:/data/db
+    ports:
+      - '27017:27017'
+volumes:
+  dbdata:
+
+networks:
+  default:
+    external:
+      name: test-network
