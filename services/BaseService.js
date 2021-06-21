@@ -7,9 +7,15 @@ module.exports = {
         genderCd: payload.genderCd,
         dob: payload.dob,
         planCode: payload.planCode,
-        premiumPerYear: payload.premiumPerYear,
+        premiumPerYear:
+          payload.premiumPerYear > 0 && payload.premiumPerYear != null
+            ? payload.premiumPerYear
+            : null,
         paymentFrequency: payload.paymentFrequency,
-        saPerYear: payload.saPerYear,
+        saPerYear:
+          payload.saPerYear > 0 && payload.saPerYear != null
+            ? payload.saPerYear
+            : null,
       };
       var result = await api.post(
         'https://api.fwd.co.th/dev-ecommerce/getProduct',
@@ -25,7 +31,6 @@ module.exports = {
         paymentFrequency: data.paymentFrequency,
         saPerYear: data.saPerYear,
         result: result.data,
-        flag: result == null ? false : true,
       };
       return model;
     } catch (error) {
