@@ -1,7 +1,11 @@
 const BaseService = require('../services/BaseService');
 module.exports = {
   async index(req, res) {
-    res.send('Capco Test Express API V 1.0.0');
+    try {
+      res.send('Capco Test Express API V 1.0.0');
+    } catch (error) {
+      console.log(error);
+    }
   },
   async getProduct(req, res) {
     try {
